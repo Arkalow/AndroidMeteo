@@ -2,8 +2,12 @@ package fr.iut_amiens.weatherapplication;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+
+import java.io.IOException;
 
 import fr.iut_amiens.weatherapplication.openweathermap.WeatherManager;
+import fr.iut_amiens.weatherapplication.openweathermap.WeatherResponse;
 
 public class MainActivity extends AppCompatActivity {
 

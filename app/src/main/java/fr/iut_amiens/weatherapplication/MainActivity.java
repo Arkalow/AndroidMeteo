@@ -9,7 +9,7 @@ import java.io.IOException;
 import fr.iut_amiens.weatherapplication.openweathermap.WeatherManager;
 import fr.iut_amiens.weatherapplication.openweathermap.WeatherResponse;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements WeatherListener{
 
     private WeatherManager weatherManager;
 
@@ -33,5 +33,14 @@ public class MainActivity extends AppCompatActivity {
         // ForecastResponse forecast = weatherManager.findForecastByGeographicCoordinates(49.8942, 2.2957);
 
         // documentation : https://openweathermap.org/forecast5
+
+        WeatherTask weatherTask = new WeatherTask();
+        weatherTask.addListener(this);
+        weatherTask.execute();
+    }
+
+    @Override
+    public void getWeather(WeatherResponse weather) {
+        Log.d("getWeather", weather.toString());
     }
 }

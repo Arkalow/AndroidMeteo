@@ -3,6 +3,8 @@ package fr.iut_amiens.weatherapplication;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.IOException;
 
@@ -12,6 +14,7 @@ import fr.iut_amiens.weatherapplication.openweathermap.WeatherResponse;
 public class MainActivity extends AppCompatActivity implements WeatherListener{
 
     private WeatherManager weatherManager;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +40,13 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
         WeatherTask weatherTask = new WeatherTask();
         weatherTask.addListener(this);
         weatherTask.execute();
+        textView = findViewById(R.id.weather);
     }
 
     @Override
     public void getWeather(WeatherResponse weather) {
-        Log.d("getWeather", weather.toString());
+        Log.d("getWeather", weather.getName());
+        textView.setText(weather.toString());
+        this.setTitle(weather.getName());
     }
 }

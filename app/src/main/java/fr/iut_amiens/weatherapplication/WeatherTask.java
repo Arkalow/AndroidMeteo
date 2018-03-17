@@ -13,7 +13,7 @@ import fr.iut_amiens.weatherapplication.openweathermap.WeatherResponse;
 /***
  * Created by omer on 16/03/18.
  */
-public class WeatherTask extends AsyncTask <Object ,Integer, String> {
+public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
     private List<WeatherListener> listeners;
     public WeatherTask(){
         listeners = new ArrayList<>();
@@ -40,9 +40,8 @@ public class WeatherTask extends AsyncTask <Object ,Integer, String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.d("Task", weather.toString());
-        Log.d("Task", listeners.toString());
-        listenerNotify(weather);
+        publishProgress(weather);
+
 
         return null;
     }
@@ -60,9 +59,10 @@ public class WeatherTask extends AsyncTask <Object ,Integer, String> {
     }
 
     @Override
-    protected void onProgressUpdate(Integer... values) {
+    protected void onProgressUpdate(WeatherResponse... values) {
         super.onProgressUpdate(values);
         Log.d("Task", "Task: Progress");
+        listenerNotify(values[0]);
     }
 
     @Override

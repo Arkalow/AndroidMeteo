@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/title"
-        android:text="Weather"
+        android:text="@string/title"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,13 +36,13 @@
 
     <TextView
         android:id="@+id/temps"
-        android:layout_width="wrap_content"
+        android:text="Rain"
 
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_marginLeft="8dp"
 
-        android:text="Rain"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/imageView" />
 
@@ -61,7 +61,7 @@
 
     <TextView
         android:id="@+id/conditions"
-        android:text="Conditions"
+        android:text="@string/conditions"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
 
     <TextView
         android:id="@+id/temperature"
-        android:text="Temperature"
+        android:text="@string/temperature"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
 
     <TextView
         android:id="@+id/pressure"
-        android:text="Pressure"
+        android:text="@string/pressure"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
 
     <TextView
         android:id="@+id/humidity"
-        android:text="Humidity"
+        android:text="@string/humidity"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
 
     <TextView
         android:id="@+id/wind"
-        android:text="wind"
+        android:text="@string/wind"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
 
     <TextView
         android:id="@+id/speed"
-        android:text="Speed"
+        android:text="@string/speed"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -177,7 +177,7 @@
 
     <TextView
         android:id="@+id/information"
-        android:text="Information"
+        android:text="@string/information"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -189,7 +189,7 @@
 
     <TextView
         android:id="@+id/lastUpdate"
-        android:text="Last update"
+        android:text="@string/last_update"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

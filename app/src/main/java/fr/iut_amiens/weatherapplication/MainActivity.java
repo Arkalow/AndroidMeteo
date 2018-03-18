@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
         WeatherTask weatherTask = new WeatherTask();
         weatherTask.addListener(this);
         weatherTask.execute();
-        textView = findViewById(R.id.weather);
+        textView = findViewById(R.id.);
     }
 
     @Override

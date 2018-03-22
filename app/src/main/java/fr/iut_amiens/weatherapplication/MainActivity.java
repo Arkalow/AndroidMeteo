@@ -1,10 +1,12 @@
 package fr.iut_amiens.weatherapplication;
 
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import fr.iut_amiens.weatherapplication.openweathermap.WeatherManager;
@@ -20,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
     private TextView humidity;
     private TextView speed;
     private TextView lastUpdate;
+
+    private WeatherTask weatherTask;
 
 
     @Override
@@ -43,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
 
         // documentation : https://openweathermap.org/forecast5
 
-        WeatherTask weatherTask = new WeatherTask();
+        weatherTask = new WeatherTask();
         weatherTask.addListener(this);
         weatherTask.execute();
 
@@ -54,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
         humidity = findViewById(R.id.humidity_value);
         speed = findViewById(R.id.speed_value);
         lastUpdate = findViewById(R.id.lastUpdate_value);
+
+
 
     }
 
@@ -90,18 +96,25 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_menu, menu);
-        return true;
-    }
 
-    /***
-     * Sélection menu
-     * @param item
-     * @return
-     */
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.app_bar_search){
-            Log.d("Menu", "Selection");
-        }
-        return super.onOptionsItemSelected(item);
+        final MenuItem searchItem = menu.findItem(R.id.app_bar_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Log.d("Menu", "Submit");
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                Log.d("Menu", "Text Change");
+                return false;
+            }
+        });
+
+        return true;
     }
 }

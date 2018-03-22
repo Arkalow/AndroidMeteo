@@ -1,18 +1,11 @@
 package fr.iut_amiens.weatherapplication;
 
 import android.os.Bundle;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.io.IOException;
 
 import fr.iut_amiens.weatherapplication.openweathermap.WeatherManager;
 import fr.iut_amiens.weatherapplication.openweathermap.WeatherResponse;
@@ -96,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        getMenuInflater().inflate(R.menu.search_menu, menu);
         return true;
     }
 
@@ -106,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
      * @return
      */
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.){
+        if(item.getItemId() == R.id.app_bar_search){
             Log.d("Menu", "Selection");
         }
         return super.onOptionsItemSelected(item);

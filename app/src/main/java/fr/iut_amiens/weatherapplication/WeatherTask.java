@@ -28,18 +28,37 @@ public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
         listeners = new ArrayList<>();
     }
 
+    /***
+     * Constructeur par coordonnée
+     * @param latitude latitude
+     * @param longitude longitude
+     */
     public WeatherTask(double latitude, double longitude){
         this.latitude = latitude;
         this.longitude = longitude;
         listeners = new ArrayList<>();
     }
 
+    /***
+     * Ajoute un abonné
+     * @param listener
+     */
     public void addListener(WeatherListener listener){
         listeners.add(listener);
     }
+
+    /***
+     * Supprimer un abonné
+     * @param listener
+     */
     public void removeListener(WeatherListener listener){
         listeners.remove(listener);
     }
+
+    /***
+     * Envoie la notification au abonnés
+     * @param weather
+     */
     public void listenerNotify(WeatherResponse weather){
         for (WeatherListener listener : listeners){
             listener.getWeather(weather);

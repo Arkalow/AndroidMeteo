@@ -50,10 +50,16 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
 
         // documentation : https://openweathermap.org/forecast5
 
+        /**
+         * Lancement d'une recherche au démarage
+         */
         weatherTask = new WeatherTask("Amiens");
         weatherTask.addListener(this);
         weatherTask.execute();
 
+        /**
+         * Champs à afficher
+         */
         temps = findViewById(R.id.temps);
         temps_description = findViewById(R.id.tempsDescription);
         temperature = findViewById(R.id.temperature_value);
@@ -62,10 +68,12 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
         speed = findViewById(R.id.speed_value);
         lastUpdate = findViewById(R.id.lastUpdate_value);
 
-
-
     }
 
+    /**
+     * Fonction du listener WeatherListener appelé automatiquement par WeatherTask
+     * @param weatherResponse
+     */
     @Override
     public void getWeather(WeatherResponse weatherResponse) {
         WeatherResponse.Weather weather = weatherResponse.getWeather().get(0);
@@ -81,6 +89,12 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
         setText(lastUpdate, "Comming soon", "None");
     }
 
+    /***
+     * Set value on textView and check null value
+     * @param champs
+     * @param value
+     * @param defaultValue
+     */
     public void setText(TextView champs, String value, String defaultValue) {
         try {
             champs.setText(value);
@@ -91,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
             Log.e("Champs", exception.getMessage());
         }
     }
+
     /***
      * Création du menu
      * @param menu

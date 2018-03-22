@@ -5,6 +5,8 @@ import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -86,5 +88,27 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
         }catch (Exception exception){
             Log.e("Champs", exception.getMessage());
         }
+    }
+    /***
+     * Création du menu
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    /***
+     * Sélection menu
+     * @param item
+     * @return
+     */
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.){
+            Log.d("Menu", "Selection");
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -16,6 +16,7 @@ import fr.iut_amiens.weatherapplication.openweathermap.WeatherResponse;
 public class MainActivity extends AppCompatActivity implements WeatherListener{
 
     private WeatherManager weatherManager;
+    private TextView title;
     private TextView temps;
     private TextView temps_description;
     private TextView temperature;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
         /**
          * Champs à afficher
          */
+        title = findViewById(R.id.title);
         temps = findViewById(R.id.temps);
         temps_description = findViewById(R.id.tempsDescription);
         temperature = findViewById(R.id.temperature_value);
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
         Log.d("getWeather", weatherResponse.getName());
         this.setTitle(weatherResponse.getName());
 
+        setText(title, "Weather in " + weatherResponse.getName(), "Weather");
         setText(temps, weather.getMain(), "None");
         setText(temps_description, weather.getDescription(), "None");
         setText(temperature, weatherResponse.getMain().getTemp() + " C°", "None");

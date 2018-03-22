@@ -15,16 +15,50 @@ import fr.iut_amiens.weatherapplication.openweathermap.WeatherResponse;
  */
 public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
     private List<WeatherListener> listeners;
-    public WeatherTask(){
+    private String city;
+    private double latitude;
+    private double longitude;
+
+    /***
+     * Constructeur par ville
+     * @param city
+     */
+    public WeatherTask(String city){
+        this.city = city;
         listeners = new ArrayList<>();
     }
 
+    /***
+     * Constructeur par coordonnée
+     * @param latitude latitude
+     * @param longitude longitude
+     */
+    public WeatherTask(double latitude, double longitude){
+        this.latitude = latitude;
+        this.longitude = longitude;
+        listeners = new ArrayList<>();
+    }
+
+    /***
+     * Ajoute un abonné
+     * @param listener
+     */
     public void addListener(WeatherListener listener){
         listeners.add(listener);
     }
+
+    /***
+     * Supprimer un abonné
+     * @param listener
+     */
     public void removeListener(WeatherListener listener){
         listeners.remove(listener);
     }
+
+    /***
+     * Envoie la notification au abonnés
+     * @param weather
+     */
     public void listenerNotify(WeatherResponse weather){
         for (WeatherListener listener : listeners){
             listener.getWeather(weather);
@@ -36,7 +70,7 @@ public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
         WeatherManager weatherManager = new WeatherManager();
         WeatherResponse weather = null;
         try {
-            weather = weatherManager.findWeatherByCityName("Amiens");
+            weather = weatherManager.findWeatherByCityName(city);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,6 +90,7 @@ public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
     protected void onPostExecute(String str) {
         super.onPostExecute(str);
         Log.d("Task", "onPostExecute");
+        onCancelled();
     }
 
     @Override

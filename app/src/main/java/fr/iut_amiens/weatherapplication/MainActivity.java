@@ -1,16 +1,14 @@
 package fr.iut_amiens.weatherapplication;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.widget.TextViewCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
-import android.widget.EditText;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.SearchView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.io.IOException;
 
 import fr.iut_amiens.weatherapplication.openweathermap.WeatherManager;
 import fr.iut_amiens.weatherapplication.openweathermap.WeatherResponse;
@@ -18,6 +16,7 @@ import fr.iut_amiens.weatherapplication.openweathermap.WeatherResponse;
 public class MainActivity extends AppCompatActivity implements WeatherListener{
 
     private WeatherManager weatherManager;
+    private TextView title;
     private TextView temps;
     private TextView temps_description;
     private TextView temperature;
@@ -26,12 +25,16 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
     private TextView speed;
     private TextView lastUpdate;
 
+    private WeatherTask weatherTask;
+
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        context = this;
         weatherManager = new WeatherManager();
 
         // Récupération de la météo actuelle :
@@ -48,10 +51,17 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
 
         // documentation : https://openweathermap.org/forecast5
 
-        WeatherTask weatherTask = new WeatherTask();
+        /**
+         * Lancement d'une recherche au démarage
+         */
+        weatherTask = new WeatherTask("Amiens");
         weatherTask.addListener(this);
         weatherTask.execute();
 
+        /**
+         * Champs à afficher
+         */
+        title = findViewById(R.id.title);
         temps = findViewById(R.id.temps);
         temps_description = findViewById(R.id.tempsDescription);
         temperature = findViewById(R.id.temperature_value);
@@ -62,12 +72,17 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
 
     }
 
+    /**
+     * Fonction du listener WeatherListener appelé automatiquement par WeatherTask
+     * @param weatherResponse
+     */
     @Override
     public void getWeather(WeatherResponse weatherResponse) {
         WeatherResponse.Weather weather = weatherResponse.getWeather().get(0);
         Log.d("getWeather", weatherResponse.getName());
         this.setTitle(weatherResponse.getName());
 
+        setText(title, "Weather in " + weatherResponse.getName(), "Weather");
         setText(temps, weather.getMain(), "None");
         setText(temps_description, weather.getDescription(), "None");
         setText(temperature, weatherResponse.getMain().getTemp() + " C°", "None");
@@ -77,6 +92,12 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
         setText(lastUpdate, "Comming soon", "None");
     }
 
+    /***
+     * Set value on textView and check null value
+     * @param champs
+     * @param value
+     * @param defaultValue
+     */
     public void setText(TextView champs, String value, String defaultValue) {
         try {
             champs.setText(value);
@@ -86,5 +107,38 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
         }catch (Exception exception){
             Log.e("Champs", exception.getMessage());
         }
+    }
+
+    /***
+     * Création du menu
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+
+        final MenuItem searchItem = menu.findItem(R.id.app_bar_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Log.d("Menu", "Submit");
+                weatherTask = new WeatherTask(s);
+                weatherTask.addListener((WeatherListener) context);
+                weatherTask.execute();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                Log.d("Menu", "Text Change");
+                return false;
+            }
+        });
+
+        return true;
     }
 }

@@ -11,6 +11,7 @@
     <TextView
         android:id="@+id/title"
         android:text="@string/title"
+        android:textSize="14sp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,6 +38,7 @@
     <TextView
         android:id="@+id/temps"
         android:text="Rain"
+        android:textSize="14sp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,6 +52,7 @@
     <TextView
         android:id="@+id/tempsDescription"
         android:text="light rain"
+        android:textSize="14sp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,6 +65,7 @@
     <TextView
         android:id="@+id/conditions"
         android:text="@string/conditions"
+        android:textSize="14sp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,6 +78,7 @@
     <TextView
         android:id="@+id/temperature"
         android:text="@string/temperature"
+        android:textSize="14sp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -87,6 +92,7 @@
     <TextView
         android:id="@+id/temperature_value"
         android:text="12.90 C°"
+        android:textSize="14sp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -99,6 +105,7 @@
     <TextView
         android:id="@+id/pressure"
         android:text="@string/pressure"
+        android:textSize="14sp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -111,6 +118,7 @@
     <TextView
         android:id="@+id/pressure_value"
         android:text="1015.00 hPa"
+        android:textSize="14sp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -121,6 +129,7 @@
     <TextView
         android:id="@+id/humidity"
         android:text="@string/humidity"
+        android:textSize="14sp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -133,6 +142,7 @@
     <TextView
         android:id="@+id/humidity_value"
         android:text="76%"
+        android:textSize="14sp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -143,6 +153,7 @@
     <TextView
         android:id="@+id/wind"
         android:text="@string/wind"
+        android:textSize="14sp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -155,6 +166,7 @@
     <TextView
         android:id="@+id/speed"
         android:text="@string/speed"
+        android:textSize="14sp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -168,6 +180,7 @@
     <TextView
         android:id="@+id/speed_value"
         android:text="7.70 m/s"
+        android:textSize="14sp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -178,6 +191,7 @@
     <TextView
         android:id="@+id/information"
         android:text="@string/information"
+        android:textSize="14sp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -190,6 +204,7 @@
     <TextView
         android:id="@+id/lastUpdate"
         android:text="@string/last_update"
+        android:textSize="14sp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -203,6 +218,7 @@
     <TextView
         android:id="@+id/lastUpdate_value"
         android:text="3/15/18 10:00 PM"
+        android:textSize="14sp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

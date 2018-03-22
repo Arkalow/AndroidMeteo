@@ -1,5 +1,6 @@
 package fr.iut_amiens.weatherapplication;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -25,12 +26,14 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
 
     private WeatherTask weatherTask;
 
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        context = this;
         weatherManager = new WeatherManager();
 
         // Récupération de la météo actuelle :
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
 
         // documentation : https://openweathermap.org/forecast5
 
-        weatherTask = new WeatherTask();
+        weatherTask = new WeatherTask("Amiens");
         weatherTask.addListener(this);
         weatherTask.execute();
 
@@ -105,6 +108,9 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
             @Override
             public boolean onQueryTextSubmit(String s) {
                 Log.d("Menu", "Submit");
+                weatherTask = new WeatherTask(s);
+                weatherTask.addListener((WeatherListener) context);
+                weatherTask.execute();
                 return false;
             }
 

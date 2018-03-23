@@ -16,8 +16,8 @@ import fr.iut_amiens.weatherapplication.openweathermap.WeatherResponse;
 public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
     private List<WeatherListener> listeners;
     private String city;
-    private double latitude;
-    private double longitude;
+    private Double latitude;
+    private Double longitude;
 
     /***
      * Constructeur par ville
@@ -26,6 +26,8 @@ public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
     public WeatherTask(String city){
         this.city = city;
         listeners = new ArrayList<>();
+        this.latitude = null;
+        this.longitude = null;
     }
 
     /***
@@ -36,6 +38,7 @@ public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
     public WeatherTask(double latitude, double longitude){
         this.latitude = latitude;
         this.longitude = longitude;
+        this.city = null;
         listeners = new ArrayList<>();
     }
 
@@ -70,7 +73,9 @@ public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
         WeatherManager weatherManager = new WeatherManager();
         WeatherResponse weather = null;
         try {
-            weather = weatherManager.findWeatherByCityName(city);
+            if(city != null) {
+                weather = weatherManager.findWeatherByCityName(city);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

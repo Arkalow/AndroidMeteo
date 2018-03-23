@@ -12,7 +12,7 @@ public class WeatherManager {
 
     public WeatherManager() {
         client = new Retrofit.Builder()
-                .baseUrl("https://api.openweathermap.org/")
+                .baseUrl("http://api.openweathermap.org/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(WeatherClient.class);

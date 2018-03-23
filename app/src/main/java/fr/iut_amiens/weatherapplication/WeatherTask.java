@@ -16,8 +16,8 @@ import fr.iut_amiens.weatherapplication.openweathermap.WeatherResponse;
 public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
     private List<WeatherListener> listeners;
     private String city;
-    private double latitude;
-    private double longitude;
+    private Double latitude;
+    private Double longitude;
 
     /***
      * Constructeur par ville
@@ -26,6 +26,9 @@ public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
     public WeatherTask(String city){
         this.city = city;
         listeners = new ArrayList<>();
+        this.latitude = null;
+        this.longitude = null;
+        Log.d("Task", "Constructeur city");
     }
 
     /***
@@ -33,10 +36,12 @@ public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
      * @param latitude latitude
      * @param longitude longitude
      */
-    public WeatherTask(double latitude, double longitude){
+    public WeatherTask(Double latitude, Double longitude){
         this.latitude = latitude;
         this.longitude = longitude;
+        this.city = null;
         listeners = new ArrayList<>();
+        Log.d("Task", "Constructeur lat, long");
     }
 
     /***
@@ -70,7 +75,11 @@ public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
         WeatherManager weatherManager = new WeatherManager();
         WeatherResponse weather = null;
         try {
-            weather = weatherManager.findWeatherByCityName(city);
+            if(city != null) {
+                weather = weatherManager.findWeatherByCityName(city);
+            }else{
+                weather = weatherManager.findWeatherByGeographicCoordinates(latitude, longitude);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -96,7 +105,7 @@ public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
     @Override
     protected void onProgressUpdate(WeatherResponse... values) {
         super.onProgressUpdate(values);
-        Log.d("Task", "Task: Progress");
+        Log.d("Task", "Task: Progress --> " + values[0]);
         listenerNotify(values[0]);
     }
 

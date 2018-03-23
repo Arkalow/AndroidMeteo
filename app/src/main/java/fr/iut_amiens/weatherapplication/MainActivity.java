@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -33,8 +34,6 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
     private TextView humidity;
     private TextView speed;
     private TextView lastUpdate;
-
-    private WeatherTask weatherTask;
 
     private Context context;
 
@@ -167,10 +166,9 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
     }
 
     public void location(){
-        weatherTask = new WeatherTask(location.getLatitude(), location.getLongitude());
-        weatherTask.addListener((WeatherListener) MainActivity.this);
+        WeatherTask weatherTask = new WeatherTask(location.getLatitude(), location.getLongitude());
+        weatherTask.addListener(MainActivity.this);
         weatherTask.execute();
-        Toast.makeText(this, location.toString(), Toast.LENGTH_LONG).show();
         Log.d("Activity", location.toString());
     }
 
@@ -180,6 +178,13 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
      */
     @Override
     public void getWeather(WeatherResponse weatherResponse) {
+        if(weatherResponse == null){
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setMessage("This city is not referenced");
+            alert.setTitle("Error");
+            alert.create().show();
+            return;
+        }
         WeatherResponse.Weather weather = weatherResponse.getWeather().get(0);
         Log.d("getWeather", weatherResponse.getName());
         this.setTitle(weatherResponse.getName());
@@ -187,11 +192,11 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
         setText(title, "Weather in " + weatherResponse.getName(), "Weather");
         setText(temps, weather.getMain(), "None");
         setText(temps_description, weather.getDescription(), "None");
-        setText(temperature, weatherResponse.getMain().getTemp() + " C°", "None");
-        setText(pressure,  weatherResponse.getMain().getPressure() + " hPa", "None");
-        setText(humidity, weatherResponse.getMain().getHumidity() + "%", "None");
-        setText(speed, weatherResponse.getWind().getSpeed() + " m/s", "None");
-        setText(lastUpdate, "Comming soon", "None");
+        setText(temperature, weatherResponse.getMain().getTemp() + " C°", "No information");
+        setText(pressure,  weatherResponse.getMain().getPressure() + " hPa", "No information");
+        setText(humidity, weatherResponse.getMain().getHumidity() + "%", "No information");
+        setText(speed, weatherResponse.getWind().getSpeed() + " m/s", "No information");
+        setText(lastUpdate, "Comming soon", "No information");
     }
 
     /***
@@ -208,6 +213,7 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
             champs.setText(defaultValue);
         }catch (Exception exception){
             Log.e("Champs", exception.getMessage());
+            champs.setText(defaultValue);
         }
     }
 
@@ -228,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
             @Override
             public boolean onQueryTextSubmit(String s) {
                 Log.d("Menu", "Submit");
-                weatherTask = new WeatherTask(s);
+                WeatherTask weatherTask = new WeatherTask(s);
                 weatherTask.addListener((WeatherListener) context);
                 weatherTask.execute();
                 return false;

@@ -9,4 +9,11 @@
     <string name="speed">Speed</string>
     <string name="information">Information</string>
     <string name="last_update">Last update</string>
+    <string name="temps">No information</string>
+    <string name="tempsDescription">No information</string>
+    <string name="temperature_value">No information</string>
+    <string name="pressure_value">No information</string>
+    <string name="humidity_value">No information</string>
+    <string name="speed_value">No information</string>
+    <string name="lasUpdate_value">Comming soon</string>
 </resources>

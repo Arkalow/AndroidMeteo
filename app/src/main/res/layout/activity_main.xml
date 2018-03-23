@@ -37,7 +37,7 @@
 
     <TextView
         android:id="@+id/temps"
-        android:text="Rain"
+        android:text="@string/temps"
         android:textSize="14sp"
 
         android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
 
     <TextView
         android:id="@+id/tempsDescription"
-        android:text="light rain"
+        android:text="@string/tempsDescription"
         android:textSize="14sp"
 
         android:layout_width="wrap_content"
@@ -91,7 +91,7 @@
 
     <TextView
         android:id="@+id/temperature_value"
-        android:text="12.90 C°"
+        android:text="@string/temperature_value"
         android:textSize="14sp"
 
         android:layout_width="wrap_content"
@@ -117,7 +117,7 @@
 
     <TextView
         android:id="@+id/pressure_value"
-        android:text="1015.00 hPa"
+        android:text="@string/pressure_value"
         android:textSize="14sp"
 
         android:layout_width="wrap_content"
@@ -141,7 +141,7 @@
 
     <TextView
         android:id="@+id/humidity_value"
-        android:text="76%"
+        android:text="@string/humidity_value"
         android:textSize="14sp"
 
         android:layout_width="wrap_content"
@@ -179,7 +179,7 @@
 
     <TextView
         android:id="@+id/speed_value"
-        android:text="7.70 m/s"
+        android:text="@string/speed_value"
         android:textSize="14sp"
 
         android:layout_width="wrap_content"
@@ -217,7 +217,7 @@
 
     <TextView
         android:id="@+id/lastUpdate_value"
-        android:text="3/15/18 10:00 PM"
+        android:text="@string/lasUpdate_value"
         android:textSize="14sp"
 
         android:layout_width="wrap_content"

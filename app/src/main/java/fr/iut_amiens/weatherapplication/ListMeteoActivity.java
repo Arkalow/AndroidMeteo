@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import java.util.List;
+
 import fr.iut_amiens.weatherapplication.openweathermap.ForecastResponse;
 
 public class ListMeteoActivity extends AppCompatActivity implements GetForecastResponseListener{
@@ -35,8 +37,15 @@ public class ListMeteoActivity extends AppCompatActivity implements GetForecastR
 
     }
 
+    /**
+     * Fonction du listener GetForcastResponseListener appelé automatiquement par GetForcastResponseTask
+     *
+     * @param forecastResponse
+     */
     @Override
     public void getForecast(ForecastResponse forecastResponse) {
+
+        List<ForecastResponse.Forecast> forecasts = forecastResponse.getList();
 
         /***
          * nameAdapter : contient la liste des notes
@@ -45,7 +54,7 @@ public class ListMeteoActivity extends AppCompatActivity implements GetForecastR
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new MeteoAdapter(this));
+        recyclerView.setAdapter(new MeteoAdapter(this, forecasts));
         nameAdapter = ((MeteoAdapter) recyclerView.getAdapter());
 
         Log.d("ListMeteoActivity", forecastResponse.getCity().toString());

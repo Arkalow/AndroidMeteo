@@ -26,6 +26,7 @@ public class ListMeteoActivity extends AppCompatActivity implements GetForecastR
         Bundle b = getIntent().getExtras();
         if (null != b) {
             city = b.getString("city");
+            this.setTitle(city);
         }
 
         /***

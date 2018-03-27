@@ -27,7 +27,7 @@ import com.squareup.picasso.Picasso;
 import fr.iut_amiens.weatherapplication.openweathermap.WeatherManager;
 import fr.iut_amiens.weatherapplication.openweathermap.WeatherResponse;
 
-public class MainActivity extends AppCompatActivity implements WeatherListener {
+public class MainActivity extends AppCompatActivity implements GetWeatherResponseListener {
 
     private WeatherManager weatherManager;
     private TextView title;
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements WeatherListener {
         /**
          * Lancement d'une recherche au démarage
          */
-        //weatherTask = new WeatherTask("Amiens");
+        //weatherTask = new GetWeatherResponseTask("Amiens");
         //weatherTask.addListener(this);
         //weatherTask.execute();
 
@@ -170,14 +170,14 @@ public class MainActivity extends AppCompatActivity implements WeatherListener {
     }
 
     public void location() {
-        WeatherTask weatherTask = new WeatherTask(location.getLatitude(), location.getLongitude());
-        weatherTask.addListener(MainActivity.this);
-        weatherTask.execute();
+        GetWeatherResponseTask getWeatherResponseTask = new GetWeatherResponseTask(location.getLatitude(), location.getLongitude());
+        getWeatherResponseTask.addListener(MainActivity.this);
+        getWeatherResponseTask.execute();
         Log.d("Activity", location.toString());
     }
 
     /**
-     * Fonction du listener WeatherListener appelé automatiquement par WeatherTask
+     * Fonction du listener GetWeatherResponseListener appelé automatiquement par GetWeatherResponseTask
      *
      * @param weatherResponse
      */
@@ -241,9 +241,9 @@ public class MainActivity extends AppCompatActivity implements WeatherListener {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 Log.d("Menu", "Submit");
-                WeatherTask weatherTask = new WeatherTask(s);
-                weatherTask.addListener((WeatherListener) context);
-                weatherTask.execute();
+                GetWeatherResponseTask getWeatherResponseTask = new GetWeatherResponseTask(s);
+                getWeatherResponseTask.addListener((GetWeatherResponseListener) context);
+                getWeatherResponseTask.execute();
                 return false;
             }
 

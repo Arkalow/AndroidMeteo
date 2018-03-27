@@ -13,8 +13,8 @@ import fr.iut_amiens.weatherapplication.openweathermap.WeatherResponse;
 /***
  * Created by omer on 16/03/18.
  */
-public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
-    private List<WeatherListener> listeners;
+public class GetWeatherResponseTask extends AsyncTask <Object ,WeatherResponse, String> {
+    private List<GetWeatherResponseListener> listeners;
     private String city;
     private Double latitude;
     private Double longitude;
@@ -23,7 +23,7 @@ public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
      * Constructeur par ville
      * @param city
      */
-    public WeatherTask(String city){
+    public GetWeatherResponseTask(String city){
         this.city = city;
         listeners = new ArrayList<>();
         this.latitude = null;
@@ -36,7 +36,7 @@ public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
      * @param latitude latitude
      * @param longitude longitude
      */
-    public WeatherTask(Double latitude, Double longitude){
+    public GetWeatherResponseTask(Double latitude, Double longitude){
         this.latitude = latitude;
         this.longitude = longitude;
         this.city = null;
@@ -48,7 +48,7 @@ public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
      * Ajoute un abonné
      * @param listener
      */
-    public void addListener(WeatherListener listener){
+    public void addListener(GetWeatherResponseListener listener){
         listeners.add(listener);
     }
 
@@ -56,7 +56,7 @@ public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
      * Supprimer un abonné
      * @param listener
      */
-    public void removeListener(WeatherListener listener){
+    public void removeListener(GetWeatherResponseListener listener){
         listeners.remove(listener);
     }
 
@@ -65,7 +65,7 @@ public class WeatherTask extends AsyncTask <Object ,WeatherResponse, String> {
      * @param weather
      */
     public void listenerNotify(WeatherResponse weather){
-        for (WeatherListener listener : listeners){
+        for (GetWeatherResponseListener listener : listeners){
             listener.getWeather(weather);
         }
     }

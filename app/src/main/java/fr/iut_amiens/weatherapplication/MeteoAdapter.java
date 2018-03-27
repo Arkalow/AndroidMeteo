@@ -27,7 +27,7 @@ public class MeteoAdapter extends RecyclerView.Adapter<MeteoViewHolder> {
     @Override
     public MeteoViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         Log.d("NameAdapter", "onCreateViewHolder");
-        View view = layoutInflater.inflate(R.layout.list_meteo, viewGroup, false);
+        View view = layoutInflater.inflate(R.layout.item_meteo, viewGroup, false);
         return new MeteoViewHolder(view);
     }
 

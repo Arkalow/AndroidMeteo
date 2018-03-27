@@ -41,7 +41,7 @@ public class MeteoViewHolder extends RecyclerView.ViewHolder {
         this.forcast = forecast;
         ForecastResponse.Weather weather = forecast.getWeather().get(0);
 
-        setText(date, forecast.getDatetime().toString());
+        setText(date, forecast.getDatetime().toString("dd MMMM yyyy HH:mm"));
         setText(temps, weather.getMain());
         setText(temps_description, weather.getDescription());
         setText(temperature, forecast.getMain().getTemp() + " C°");

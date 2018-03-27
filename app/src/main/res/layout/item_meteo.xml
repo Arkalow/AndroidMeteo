@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:layout_editor_absoluteY="81dp">
+    android:layout_marginBottom="20sp">
 
 
 

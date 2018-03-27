@@ -16,9 +16,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import fr.iut_amiens.weatherapplication.openweathermap.WeatherManager;
 import fr.iut_amiens.weatherapplication.openweathermap.WeatherResponse;
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
     private TextView humidity;
     private TextView speed;
     private TextView lastUpdate;
+    private ImageView imageView;
 
     private Context context;
 
@@ -98,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
         humidity = findViewById(R.id.humidity_value);
         speed = findViewById(R.id.speed_value);
         lastUpdate = findViewById(R.id.lastUpdate_value);
-
+        imageView = findViewById(R.id.imageView);
     }
 
     /***
@@ -197,6 +201,8 @@ public class MainActivity extends AppCompatActivity implements WeatherListener{
         setText(humidity, weatherResponse.getMain().getHumidity() + "%", "No information");
         setText(speed, weatherResponse.getWind().getSpeed() + " m/s", "No information");
         setText(lastUpdate, "Comming soon", "No information");
+
+        Picasso.with(context).load(weather.getIconUri()).into(imageView);
     }
 
     /***

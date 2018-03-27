@@ -5,6 +5,6 @@ import fr.iut_amiens.weatherapplication.openweathermap.WeatherResponse;
 /***
  * Created by omer on 16/03/18.
  */
-interface WeatherListener {
+interface GetWeatherResponseListener {
     public void getWeather(WeatherResponse weather);
 }

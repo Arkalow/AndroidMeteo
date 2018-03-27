@@ -47,7 +47,7 @@ public class MeteoViewHolder extends RecyclerView.ViewHolder {
         setText(temperature, forecast.getMain().getTemp() + " C°");
 
         //Chargement de l'image
-        Picasso.with(itemView.getContext()).load(weather.getIcon()).into(imageView);
+        Picasso.with(itemView.getContext()).load(weather.getIconUri()).into(imageView);
         Log.d("MeteoViewHolder", forecast.getWeather().toString());
     }
 

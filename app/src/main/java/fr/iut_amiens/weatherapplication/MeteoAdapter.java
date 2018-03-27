@@ -1,5 +1,6 @@
 package fr.iut_amiens.weatherapplication;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -14,7 +15,7 @@ import android.view.ViewGroup;
  */
 public class MeteoAdapter extends RecyclerView.Adapter<MeteoViewHolder> {
 
-    private List<String> titles;
+    private List<String> data;
     private final LayoutInflater layoutInflater;
 
     /***
@@ -22,6 +23,7 @@ public class MeteoAdapter extends RecyclerView.Adapter<MeteoViewHolder> {
      */
     public MeteoAdapter(Context context) {
         layoutInflater = LayoutInflater.from(context);
+        data = new ArrayList<>();
     }
 
     @Override
@@ -38,7 +40,7 @@ public class MeteoAdapter extends RecyclerView.Adapter<MeteoViewHolder> {
 
     @Override
     public int getItemCount() {
-        return titles.size();
+        return data.size();
     }
 
 }

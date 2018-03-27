@@ -10,24 +10,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import fr.iut_amiens.weatherapplication.openweathermap.ForecastResponse;
+
 /***
  * Created by omer on 27/03/18.
  */
 public class MeteoAdapter extends RecyclerView.Adapter<MeteoViewHolder> {
 
-    private List<String> data;
+    private List<ForecastResponse.Forecast> forecasts;
     private final LayoutInflater layoutInflater;
 
     /***
      * Constructeur de NameAdapter
      */
-    public MeteoAdapter(Context context) {
+    public MeteoAdapter(Context context, List<ForecastResponse.Forecast> forecasts) {
         layoutInflater = LayoutInflater.from(context);
-        data = new ArrayList<>();
-        data.add("item numero 1");
-        notifyItemInserted(getItemCount());
-        data.add("item numero 2");
-        notifyItemInserted(getItemCount());
+
+        this.forecasts = forecasts;
+
+        for (ForecastResponse.Forecast forecast : forecasts){
+            notifyItemInserted(getItemCount());
+        }
     }
 
     @Override
@@ -42,12 +45,12 @@ public class MeteoAdapter extends RecyclerView.Adapter<MeteoViewHolder> {
         Log.d("MeteoAdapter", "onBindViewHolder");
 
         //On l'envoi au viewholder pour qu'il l'affiche
-        viewHolder.bind(data.get(position));
+        viewHolder.bind(forecasts.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return forecasts.size();
     }
 
 }

@@ -3,32 +3,64 @@ package fr.iut_amiens.weatherapplication;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import fr.iut_amiens.weatherapplication.openweathermap.ForecastResponse;
 
 /***
  * Created by omer on 27/03/18.
  */
 public class MeteoViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView textView;
-    private String data;
+    private ForecastResponse.Forecast forcast;
+
+    private TextView date;
+    private TextView temps;
+    private TextView temps_description;
+    private TextView temperature;
+    private ImageView imageView;
 
     public MeteoViewHolder(View itemView) {
         super(itemView);
-        textView = itemView.findViewById(R.id.item);
+
+        date = itemView.findViewById(R.id.date);
+        temps = itemView.findViewById(R.id.temps);
+        temps_description = itemView.findViewById(R.id.tempsDescription);
+        temperature = itemView.findViewById(R.id.temperature);
+        imageView = itemView.findViewById(R.id.imageView);
     }
 
     /***
      * Modifie la vue
-     * @param data : donnée
+     * @param forecast : donnée
      */
-    public void bind(String data) {
-        this.data = data;
-        textView.setText(data);
-        Log.d("MeteoViewHolder", textView.getText().toString());
+    public void bind(ForecastResponse.Forecast forecast) {
+        this.forcast = forecast;
+        ForecastResponse.Weather weather = forecast.getWeather().get(0);
+
+        setText(date, forecast.getDatetime().toString("dd MMMM yyyy HH:mm"));
+        setText(temps, weather.getMain());
+        setText(temps_description, weather.getDescription());
+        setText(temperature, forecast.getMain().getTemp() + " C°");
+
+        //Chargement de l'image
+        Picasso.with(itemView.getContext()).load(weather.getIconUri()).into(imageView);
+        Log.d("MeteoViewHolder", forecast.getWeather().toString());
     }
 
-    public void recycle() {
-        textView.setText("");
+    /***
+     * Set value on textView and check null value
+     * @param champs
+     * @param value
+     */
+    public void setText(TextView champs, String value) {
+        try {
+            champs.setText(value);
+        } catch (Exception exception) {
+            Log.e("Champs", exception.getMessage());
+        }
     }
 }

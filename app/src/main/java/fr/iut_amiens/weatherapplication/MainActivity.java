@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements GetWeatherRespons
     private ImageView imageView;
 
     private Context context;
-
+    private String city = null;
     //GPS
     private static final int REQUEST_PERMISSION = 1;
     private LocationManager locationManager;
@@ -203,7 +203,9 @@ public class MainActivity extends AppCompatActivity implements GetWeatherRespons
         setText(speed, weatherResponse.getWind().getSpeed() + " m/s", "No information");
         setText(lastUpdate, "Comming soon", "No information");
 
+        //Chargement de l'image
         Picasso.with(context).load(weather.getIconUri()).into(imageView);
+        city = weatherResponse.getName();
     }
 
     /***
@@ -264,8 +266,16 @@ public class MainActivity extends AppCompatActivity implements GetWeatherRespons
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.list){
-            Intent intent = new Intent(this, ListMeteoActivity.class);
-            startActivity(intent);
+            if(city != null){
+                Intent intent = new Intent(this, ListMeteoActivity.class);
+                intent.putExtra("city", city);
+                startActivity(intent);
+            }else{
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setMessage("The city is not yet loaded");
+                alert.setTitle("Error");
+                alert.create().show();
+            }
         }
         return super.onOptionsItemSelected(item);
     }

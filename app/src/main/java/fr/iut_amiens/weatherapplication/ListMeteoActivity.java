@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import fr.iut_amiens.weatherapplication.openweathermap.ForecastResponse;
 
@@ -18,11 +19,17 @@ public class ListMeteoActivity extends AppCompatActivity implements GetForecastR
         setContentView(R.layout.activity_list_meteo);
 
         /***
-         * nameAdapter : contient la liste des notes
+         * Récupération du nom de la ville
          */
+        Bundle b = getIntent().getExtras();
+        if (null != b) {
+            city = b.getString("city");
+        }
 
-
-        GetForecastResponseTask getForecastResponseTask = new GetForecastResponseTask("Amiens");
+        /***
+         * Lancement de l'AsyncTask
+         */
+        GetForecastResponseTask getForecastResponseTask = new GetForecastResponseTask(city);
         getForecastResponseTask.addListener(this);
         getForecastResponseTask.execute();
 
@@ -30,11 +37,17 @@ public class ListMeteoActivity extends AppCompatActivity implements GetForecastR
 
     @Override
     public void getForecast(ForecastResponse forecastResponse) {
+
+        /***
+         * nameAdapter : contient la liste des notes
+         */
         RecyclerView recyclerView; //List of item
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(new MeteoAdapter(this));
         nameAdapter = ((MeteoAdapter) recyclerView.getAdapter());
+
+        Log.d("ListMeteoActivity", forecastResponse.getCity().toString());
     }
 }

@@ -1,23 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:layout_editor_absoluteY="81dp">
+
 
 
     <TextView
-        android:id="@+id/item"
-        android:layout_width="match_parent"
+        android:id="@+id/date"
+        android:text="@string/date"
+        android:textSize="14sp"
+
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:ellipsize="end"
-        android:lines="1"
-        android:textAlignment="center"
-        android:drawablePadding="2dip"
-        android:paddingLeft="30dip"
-        android:paddingRight="30dip"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-        />
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+
+        app:layout_constraintStart_toStartOf="@+id/date"
+        app:layout_constraintTop_toBottomOf="@+id/date"
+        app:srcCompat="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/temps"
+        android:text="@string/temps"
+        android:textSize="14sp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="8dp"
+
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+
+    <TextView
+        android:id="@+id/tempsDescription"
+        android:text="@string/tempsDescription"
+        android:textSize="14sp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="8dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/temperature"
+        android:text="0C°"
+        android:textSize="30sp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="30dp"
+
+        app:layout_constraintStart_toEndOf="@+id/tempsDescription"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
 
 </android.support.constraint.ConstraintLayout>

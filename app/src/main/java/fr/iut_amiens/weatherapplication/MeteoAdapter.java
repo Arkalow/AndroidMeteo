@@ -24,6 +24,10 @@ public class MeteoAdapter extends RecyclerView.Adapter<MeteoViewHolder> {
     public MeteoAdapter(Context context) {
         layoutInflater = LayoutInflater.from(context);
         data = new ArrayList<>();
+        data.add("item numero 1");
+        notifyItemInserted(getItemCount());
+        data.add("item numero 2");
+        notifyItemInserted(getItemCount());
     }
 
     @Override
@@ -34,8 +38,11 @@ public class MeteoAdapter extends RecyclerView.Adapter<MeteoViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(MeteoViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(MeteoViewHolder viewHolder, int position) {
+        Log.d("MeteoAdapter", "onBindViewHolder");
 
+        //On l'envoi au viewholder pour qu'il l'affiche
+        viewHolder.bind(data.get(position));
     }
 
     @Override

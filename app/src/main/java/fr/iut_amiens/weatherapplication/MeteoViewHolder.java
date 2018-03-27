@@ -5,13 +5,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import fr.iut_amiens.weatherapplication.openweathermap.ForecastResponse;
+
 /***
  * Created by omer on 27/03/18.
  */
 public class MeteoViewHolder extends RecyclerView.ViewHolder {
 
     private TextView textView;
-    private String data;
+    private ForecastResponse.Forecast forcast;
 
     public MeteoViewHolder(View itemView) {
         super(itemView);
@@ -20,11 +22,11 @@ public class MeteoViewHolder extends RecyclerView.ViewHolder {
 
     /***
      * Modifie la vue
-     * @param data : donnée
+     * @param forecast : donnée
      */
-    public void bind(String data) {
-        this.data = data;
-        textView.setText(data);
+    public void bind(ForecastResponse.Forecast forecast) {
+        this.forcast = forecast;
+        textView.setText(forecast.toString());
         Log.d("MeteoViewHolder", textView.getText().toString());
     }
 

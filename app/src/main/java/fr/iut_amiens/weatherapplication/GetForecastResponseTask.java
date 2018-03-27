@@ -57,6 +57,14 @@ public class GetForecastResponseTask extends AsyncTask <Object , ForecastRespons
 
     @Override
     protected String doInBackground(Object[] objects) {
+        WeatherManager weatherManager = new WeatherManager();
+        ForecastResponse forecastResponse = null;
+        try {
+            forecastResponse = weatherManager.findForecastByCityName("Amiens");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        publishProgress(forecastResponse);
 
         return null;
     }

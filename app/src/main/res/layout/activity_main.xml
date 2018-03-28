@@ -227,4 +227,21 @@
         app:layout_constraintStart_toStartOf="@+id/temperature_value"
         app:layout_constraintTop_toTopOf="@+id/lastUpdate" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="70sp"
+        android:layout_height="70sp"
+
+        android:background="@drawable/round_button"
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="#fff"
+
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="30dp"
+
+        android:text="List"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </android.support.constraint.ConstraintLayout>

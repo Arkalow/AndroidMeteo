@@ -1,10 +1,14 @@
 package fr.iut_amiens.weatherapplication;
 
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.SearchView;
 
 import java.util.List;
 
@@ -60,4 +64,29 @@ public class ListMeteoActivity extends AppCompatActivity implements GetForecastR
 
         Log.d("ListMeteoActivity", forecastResponse.getCity().toString());
     }
+
+    /***
+     * Création du menu
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.back_menu, menu);
+
+        return true;
+    }
+
+    /***
+     * Selection d'un bouton du menu
+     * @param item Selected item
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.back){
+            this.finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    
 }

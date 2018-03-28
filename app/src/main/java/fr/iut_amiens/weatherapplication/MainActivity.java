@@ -17,6 +17,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements GetWeatherRespons
     private TextView speed;
     private TextView lastUpdate;
     private ImageView imageView;
+    private Button button;
 
     private Context context;
     private String city = null;
@@ -52,20 +55,7 @@ public class MainActivity extends AppCompatActivity implements GetWeatherRespons
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /***
-         * GPS
-         */
-        //peut renvoyer null si ya pas de GPS sur l'appareil
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_PERMISSION);
-        } else {
-            //renvoi null si pas de GPS
-            getLocation();
-        }
-
+        permissionGPS();
 
         context = this;
         weatherManager = new WeatherManager();
@@ -103,6 +93,51 @@ public class MainActivity extends AppCompatActivity implements GetWeatherRespons
         speed = findViewById(R.id.speed_value);
         lastUpdate = findViewById(R.id.lastUpdate_value);
         imageView = findViewById(R.id.imageView);
+        button = findViewById(R.id.button);
+
+        //Bouton pour relancer la recherche
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.this.listMeteo();
+
+            }
+        });
+    }
+
+    /***
+     * Lance le deuxième activité
+     */
+    public void listMeteo(){
+        if(city != null){
+            Intent intent = new Intent(this, ListMeteoActivity.class);
+            intent.putExtra("city", city);
+            startActivity(intent);
+        }else{
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setMessage("The city is not yet loaded");
+            alert.setTitle("Error");
+            alert.create().show();
+        }
+    }
+    /***
+     * Récupère les permissions
+     */
+    public void permissionGPS(){
+        /***
+         * GPS
+         */
+        //peut renvoyer null si ya pas de GPS sur l'appareil
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_PERMISSION);
+        } else {
+            //renvoi null si pas de GPS
+            getLocation();
+        }
+
     }
 
     /***
@@ -266,16 +301,7 @@ public class MainActivity extends AppCompatActivity implements GetWeatherRespons
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.list){
-            if(city != null){
-                Intent intent = new Intent(this, ListMeteoActivity.class);
-                intent.putExtra("city", city);
-                startActivity(intent);
-            }else{
-                AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                alert.setMessage("The city is not yet loaded");
-                alert.setTitle("Error");
-                alert.create().show();
-            }
+            MainActivity.this.permissionGPS();
         }
         return super.onOptionsItemSelected(item);
     }

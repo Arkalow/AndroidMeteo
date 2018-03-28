@@ -10,6 +10,5 @@
     <item
         android:id="@+id/list"
         android:title="refresh"
-        android:icon="@android:drawable/ic_popup_sync"
-        app:showAsAction="always"/>
+        android:icon="@android:drawable/ic_popup_sync"/>
 </menu>

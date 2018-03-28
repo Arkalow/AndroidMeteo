@@ -88,10 +88,5 @@ public class ListMeteoActivity extends AppCompatActivity implements GetForecastR
         }
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        this.finish();
-    }
+    
 }

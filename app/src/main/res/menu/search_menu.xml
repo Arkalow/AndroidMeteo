@@ -4,12 +4,12 @@
     <item
         android:id="@+id/app_bar_search"
         android:icon="@drawable/ic_search_black_24dp"
-        android:title="Search"
+        android:title="Searchgit add"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="always"/>
     <item
         android:id="@+id/list"
-        android:title="list"
-        android:icon="@android:drawable/ic_menu_more"
+        android:title="refresh"
+        android:icon="@android:drawable/ic_popup_sync"
         app:showAsAction="always"/>
 </menu>
